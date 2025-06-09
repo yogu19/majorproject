@@ -54,4 +54,3 @@ async function initMap() {
 }
 
 initMap();
-// console.log(coordinates);
