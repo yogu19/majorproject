@@ -98,7 +98,7 @@ module.exports.createListing = async (req, res, next) => {
     newListing.geometry = {type: 'Point', coordinates: [lng, lat]}
     newListing.owner = req.user._id;
     newListing.image = {url,filename};
-    // newListing.category = req.body.listing.category;
+
   } else {
     return req.flash("error", "Location not found");
   }
