@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate.ejs") %>
     <script>
         const mapToken = "<%=process.env.Google_map_api%>";
-        const geoCoords = <%- JSON.stringify(listing.geometry.coordinates) %>;
+        const geoCoords = <% - JSON.stringify(listing.geometry.coordinates) %>;
         const initialCoordinates = {
             lat: geoCoords[1],
             lng: geoCoords[0]

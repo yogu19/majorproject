@@ -3,7 +3,8 @@
         <div class="col-8 offset-2">
             <h3 class="mb-3">Edit a listing</h3>
 
-            <form method="post" action="/listings/<%=listing._id%>/?_method=put" novalidate class="needs-validation" enctype="multipart/form-data" autocomplete="off">
+            <form method="post" action="/listings/<%=listing._id%>/?_method=put" novalidate class="needs-validation"
+                enctype="multipart/form-data" autocomplete="off">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="listing[title]" value="<%=listing.title%>" class="form-control" required>
@@ -13,25 +14,26 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" class="form-control" required>  <%=listing.description%></textarea>
+                    <textarea name="listing[description]" class="form-control"
+                        required>  <%=listing.description%></textarea>
                     <div class="invalid-feedback">enter description</div>
                 </div>
 
                 <div class="mb-3" id="updateImage">
                     Original Listing Image <br>
-                    <img src="<%=originalImageUrl%>"  alt="<%=listing.image.filename%>">
+                    <img src="<%=originalImageUrl%>" alt="<%=listing.image.filename%>">
                 </div>
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image </label>
-                    <input type="file" name="listing[image]" class="form-control" >
+                    <input type="file" name="listing[image]" class="form-control">
                 </div>
 
                 <div class="mb-3">
                     <label for="cars">Choose category</label>
                     <select class="form-select" id="category" name="listing[category]">
                         <option selected disabled hidden>Open this select menu</option>
-                        <option value="Villas" >Villas</option>
+                        <option value="Villas">Villas</option>
                         <option value="Rooms">Rooms</option>
                         <option value="Iconic Cities">Iconic Cities</option>
                         <option value="Mountains">Mountains</option>
@@ -40,20 +42,22 @@
                         <option value="Camping">Camping</option>
                         <option value="Farms">Farms</option>
                         <option value="Earth homes">Earth homes</option>
-                        <option value="Towers">Towers</option> 
+                        <option value="Towers">Towers</option>
                     </select>
                 </div>
 
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price </label>
-                        <input type="number" name="listing[price]" value="<%=listing.price%>" class="form-control" required>
+                        <input type="number" name="listing[price]" value="<%=listing.price%>" class="form-control"
+                            required>
                         <div class="invalid-feedback">enter price</div>
                     </div>
 
                     <div class="mb-3 col-md-8">
                         <label for="country" class="form-label"> Country</label>
-                        <input type="text" name="listing[country]" value="<%=listing.country%>" class="form-control" required>
+                        <input type="text" name="listing[country]" value="<%=listing.country%>" class="form-control"
+                            required>
                         <div class="invalid-feedback">enter country</div>
                     </div>
 
@@ -61,7 +65,8 @@
 
                 <div class="mb-3">
                     <label for="location" class="form-label">Location </label>
-                    <input type="text" name="listing[location]" value="<%=listing.location%>" class="form-control" required>
+                    <input type="text" name="listing[location]" value="<%=listing.location%>" class="form-control"
+                        required>
                     <div class="invalid-feedback">enter location</div>
                 </div>
 

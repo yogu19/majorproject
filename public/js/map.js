@@ -38,18 +38,18 @@ let map;
 
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   map = new Map(document.getElementById("map"), {
-    center:  initialCoordinates ,
+    center: initialCoordinates,
     zoom: 9,
-    mapId: "67b8a886cb63aa9c7470e177"
+    mapId: "67b8a886cb63aa9c7470e177",
   });
 
   const marker = new AdvancedMarkerElement({
     map,
     position: initialCoordinates,
-    title: "WanderLust"
+    title: "WanderLust",
   });
 }
 

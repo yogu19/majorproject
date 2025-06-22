@@ -1,15 +1,15 @@
-if( process.env.NODE_ENV != "production"){
+if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const path = require("path"); 
+const path = require("path");
 const methodOverride = require("method-override");
 const ExpressError = require("./utils/ExpressError");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const User = require("./models/user");
 const passport = require("passport");
@@ -40,7 +40,7 @@ const store = MongoStore.create({
   crypto: {
     secret: process.env.SECRET,
   },
-  touchAfter: 24 * 3600
+  touchAfter: 24 * 3600,
 });
 
 const sessionOption = {
@@ -55,9 +55,9 @@ const sessionOption = {
   },
 };
 
-app.get("/",(req,res) => {
+app.get("/", (req, res) => {
   res.redirect("/listings");
-})
+});
 
 app.use(session(sessionOption));
 app.use(flash());

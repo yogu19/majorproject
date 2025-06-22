@@ -1,7 +1,7 @@
 const Listing = require("../models/listing");
 
 const { Client } = require("@googlemaps/google-maps-services-js");
-const mapToken = process.env.Google_map_api;
+const mapToken = process.env.MAP_TOKEN;
 const client = new Client({});
 
 module.exports.index = async (req, res) => {
@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
     res.render("listing/index", { allListings });
   } 
   else if(typeof req.query.search !== "undefined"){
-    const allListings = await Listing.find({title: search});
+    const allListings = await Listing.find({ title: { $regex: search, $options: "i" } });
     res.render("listing/index", { allListings });
   }else{
     const allListings = await Listing.find({});
@@ -26,7 +26,7 @@ module.exports.editListing = async (req, res) => {
   const listing = await Listing.findById(id);
   if (!listing) {
     req.flash("error", "Listing you requested for does not exist");
-    res.redirect("/listings");
+     return res.redirect("/listings");
   }
 
   let originalImageUrl = listing.image.url.replace("/upload","/upload/h_250,w_250")
@@ -49,15 +49,16 @@ module.exports.updateListing = async (req, res) => {
 
   let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing});
 
-  if (response.data.status === 'OK') {
+  if (response.data.status === 'OK'&& response.data.results.length > 0) {
     const { lat, lng } = response.data.results[0].geometry.location;
     listing.geometry = {type: 'Point',coordinates: [lng, lat]};
   } else {
-    return req.flash("error", "Location not found");
+    req.flash("error", "Location not found");
+    return res.redirect("back");
   }
 
-  if (typeof req.file !== 'undefined') {
-    listing.image = {url: req.file.path, filename: req.file.filename};
+  if (req.file?.path) {
+    listing.image = { url: req.file.path, filename: req.file.filename };
   }
   
   await listing.save();
@@ -93,6 +94,7 @@ module.exports.createListing = async (req, res, next) => {
     params: {address: req.body.listing.location, key: mapToken,},
   });
 
+  console.log("connect");
   if (response.data.status === 'OK') {
     const { lat, lng } = response.data.results[0].geometry.location;
     newListing.geometry = {type: 'Point', coordinates: [lng, lat]}
