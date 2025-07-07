@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate.ejs") %>
     <script>
         const mapToken = "<%=process.env.Google_map_api%>";
-        const geoCoords = <% - JSON.stringify(listing.geometry.coordinates) %>;
+        const geoCoords = JSON.parse('<%= JSON.stringify(listing.geometry.coordinates) %>');
         const initialCoordinates = {
             lat: geoCoords[1],
             lng: geoCoords[0]
@@ -53,7 +53,7 @@
                                 <fieldset class="starability-basic">
                                     <legend>Rating:</legend>
                                     <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]"
-                                        value="1" checked aria-labe="No rating.">
+                                        value="1" checked aria-label="No rating.">
                                     <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                                     <label for="first-rate1" title="Terrible">1 star</label>
                                     <input type="radio" id="first-rate2" name="review[rating]" value="2" />
